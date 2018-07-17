@@ -1,0 +1,25 @@
+{
+  "name": "mernsocial",
+  "version": "1.0.0",
+  "description": "Social network site build using a MERN Stack",
+  "main": "server.js",
+  "scripts": {
+    "start" : "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Jason",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.4",
+    "passport-jwt": "^4.0.0",
+    "passwort": "^1.0.4",
+    "validator": "^10.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
