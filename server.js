@@ -3,12 +3,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const bodyParser = require('body-parser');
+const passport = require('passport');
+
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
 const app = express();
 const db = require('./config/keys').mongoURI;
+
+// Body parser middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+// passport middleware
+app.use(passport.initialize());
+// Passport Config - Strategies??
+require('./config/passport')(passport); // (passport) is passed into the passport file in config
 
 // using a promise - if success 'then'... 'catch' any error
 mongoose
