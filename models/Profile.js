@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = Mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
     // some data are handled by Redux

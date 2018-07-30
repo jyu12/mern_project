@@ -20,22 +20,22 @@ const validateLoginInput = require('../../validation/login')
     @desc    Tests users route
     @access  Public 
 */
-router.get('/test', (request, respond) => respond.json({msg: "user work"}));  // automatically return status 200 and as a .json
+router.get('/test', (request, response) => response.json({msg: "user work"}));  // automatically return status 200 and as a .json
 
 //  @route   POST api/users/register
 //  @desc    register the user
 //  @access  Public 
-router.post('/register', (request, respond) => {
+router.post('/register', (request, response) => {
     // de-structuring in JS?
     const { errors, isValid } = validateRegisterInput(request.body);
     if(!isValid) {
-        return respond.status(400).json(errors)
+        return response.status(400).json(errors)
     }
 
     User.findOne({ email: request.body.email }) // using body-parser to get e-mail from request
         .then(user => { // mongoose can take in call-backs or promises
             if(user) {
-                return respond  // http response as status
+                return response  // http response as status
                     .status(400)  // 400 for validation error
                     .json({ email: 'E-mail already exist' }); // replaces email field with this message
             } else {
@@ -57,7 +57,7 @@ router.post('/register', (request, respond) => {
                         if(error) throw error;
                         newUser.password = hash;
                         newUser.save()  // saving the new user along with the hashed password to mongoose
-                               .then(user => respond.json(user))    // then return the user
+                               .then(user => response.json(user))    // then return the user
                                .catch(error => console.log(error));
                     })
                 })
@@ -71,7 +71,7 @@ router.post('/register', (request, respond) => {
 /*
     JWT Token is validated by passport & passportJWT and extract information from it
 */
-router.post('/login', (request, respond) => {
+router.post('/login', (request, response) => {
     const { errors, isValid } = validateLoginInput(request.body);
 
     const email = request.body.email;
@@ -80,30 +80,30 @@ router.post('/login', (request, respond) => {
     User.findOne({ email }).then(user => {
         if(!user) {
             errors.email = 'user not found';
-             return respond.status(404).json(errors);
+             return response.status(404).json(errors);
         }
 
         bcrypt.compare(password, user.password).then(isMatch => {
             if(isMatch) {
-                // respond.json({ msg: 'Success'});
+                // response.json({ msg: 'Success'});
                 // JWT to generate a token
 
                 // Sign the token payload with user info
                 const payload = { id: user.id, name: user.name, avatar: user.avatar };
-                // token is then put into the head of respond and passport will validate it
+                // token is then put into the head of response and passport will validate it
                 // then server validate user
                 jwt.sign(payload, keys.jwtSKey, { expiresIn: 1800 }, (error, token) => {
-                    respond.json({
+                    response.json({
                         success: true,
                         token: 'Bearer ' + token, // by doing 'Bear ' + token, it is saying that this is type of 'Bearer'
                     });
                 });
             } else {
                 errors.password = 'Password incorrect'
-                return respond.status(400).json({ password });
+                return response.status(400).json({ password });
             }
-            // return isMatch === true ? respond.json({ msg: 'Success'}) 
-            //     : respond.status(400).json({ password: 'Password incorrect'})
+            // return isMatch === true ? response.json({ msg: 'Success'}) 
+            //     : response.status(400).json({ password: 'Password incorrect'})
         });
     });
 });
