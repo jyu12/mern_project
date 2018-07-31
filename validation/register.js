@@ -25,12 +25,12 @@ module.exports = function validateRegisterInput(data) {
         errors.password = 'Password field is required';
     }
 
-    if(Validator.isLength(data.password, { min: 6, max: 30 })) {
+    if(!Validator.isLength(data.password, { min: 6, max: 30 })) {
         errors.password = 'Password field is required to be at least 6 to 30 characters';
     }
 
-    if(!Validator.isEqual(data.password, data.confirmPassword)) {
-        errors.password = 'Password not the same';
+    if(!Validator.equals(data.password, data.confirmPassword)) {
+        errors.confirmPassword = 'Password not the same';
     }
 
     return {

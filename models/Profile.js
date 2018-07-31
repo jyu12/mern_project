@@ -9,7 +9,7 @@ const ProfileSchema = new Schema({
         // reference the users collection
         ref: 'users'
     },
-    // validation on the back-end also
+    // handle of profile in the URL
     handle: {
         type: String,
         required: true,
@@ -36,7 +36,7 @@ const ProfileSchema = new Schema({
         type: String,
 
     },
-    githubUserName: {
+    githubusername: {
         type: String,
     },
     experience: [
