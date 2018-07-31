@@ -34,3 +34,24 @@ Common ones
 * 404 - Resource not found
 * 500 - server erros
 * 304 - redirects
+
+## The front-end
+Each resources will have their components in react that have their own HTML and CSS.   
+so experience is a componenet, dashbroad is component.  
+Redux will maintain a global state.
+
+### create-react-app
+CLI for generating the boilerplate for a React application. So there is no need to create the webpack etc. etc.
+``npm i -g create-react-app`` -g will install react globally  
+Then create a 'client' for the react application
+``create-react-app client`` 
+### the react client app
+node_modules dir, package.json are dependency for the react app  
+It is completely independent from the backend  
+"proxy": "http://localhost:5000" is addded to package.json for axios
+
+#### concurrently
+Tip: you can do things like ``"client-install": "cd client && npm install"``  
+``npm i concurrently`` allows you to run a script with multiple commands  
+lets you do things like ``"dev": "concurrently \"npm run server\" \"npm run client\""``  
+Now, both react and backend is running in single command

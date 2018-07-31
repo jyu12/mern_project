@@ -2,3 +2,5 @@
 package-lock.json
 /config/keys.js
 Notes.md
+
+/client/node_modules
