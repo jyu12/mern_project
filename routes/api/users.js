@@ -5,12 +5,14 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const keys = require('../../config/keys')
+
+const keys = require('../../config/keys');
+const config = require('../../config/config');
 
 const User = require('../../models/User');
 
 const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login')
+const validateLoginInput = require('../../validation/login');
 
 // the function caller, this case 'server.js', is calling this file with app.use('/api/users', user)
 // So when accessing this endpoint with the URL prefix of localhost../api/users/
@@ -92,7 +94,7 @@ router.post('/login', (request, response) => {
                 const payload = { id: user.id, name: user.name, avatar: user.avatar };
                 // token is then put into the head of response and passport will validate it
                 // then server validate user
-                jwt.sign(payload, keys.jwtSKey, { expiresIn: 1800 }, (error, token) => {
+                jwt.sign(payload, keys.jwtSKey, { expiresIn: config.jwtLifetime }, (error, token) => {
                     response.json({
                         success: true,
                         token: 'Bearer ' + token, // by doing 'Bear ' + token, it is saying that this is type of 'Bearer'

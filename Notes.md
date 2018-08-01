@@ -23,17 +23,18 @@ the run command will run the entries for that key in the "script" section on the
 * routes for different resources are sperated in their own folders
 All it's doing is just return json files to the front-end
 for example:  
-...api  
-......users.js will return the resources related to users.js, i.e authentication, permissions etc etc  
-......profiles.js location, name, experience etc etc  
+- api  
+    - users.js will return the resources related to users.js, i.e authentication, permissions etc etc  
+    - profiles.js location, name, experience etc etc  
+- client
+    - React app folder
+- validation
 
 ### Types of requests
 Common ones
 * 200 - OK
 * 400 - Validation error
 * 404 - Resource not found
-* 500 - server erros
-* 304 - redirects
 
 ## The front-end
 Each resources will have their components in react that have their own HTML and CSS.   
@@ -55,3 +56,24 @@ Tip: you can do things like ``"client-install": "cd client && npm install"``
 ``npm i concurrently`` allows you to run a script with multiple commands  
 lets you do things like ``"dev": "concurrently \"npm run server\" \"npm run client\""``  
 Now, both react and backend is running in single command
+
+#### Frontawesome and bootstrap
+Using CDN to install which is just copy and pasting script into html header
+
+#### React Redux developer tool
+Chrome extension for working with React and Redux
+
+## React
+There are functional and class base components  
+- functionally should be 'dumb' component that will not involve in life cycles, states, etc  
+ - It should just display components like that, stuff that is just for displaying
+
+### Router
+Make sure it's installed in react dir and ``npm i react-router-dom``, starting version 4, its -dom
+- Creates routes for componenets, ex: "/register", "/login" 
+    - It can then be linked 'Link className="nav-link" to "/register"
+- should try to use 'exact' for the componenets  <Route exact path="/" component= { Landing } />
+    -  So it doesn't try to load all componenets?
+
+
+

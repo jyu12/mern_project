@@ -4,3 +4,7 @@ package-lock.json
 Notes.md
 
 /client/node_modules
+.DS_Store
+client/src/img/showcase.jpg.bak.jpg
+.DS_Store
+Notes.md
