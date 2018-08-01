@@ -75,5 +75,34 @@ Make sure it's installed in react dir and ``npm i react-router-dom``, starting v
 - should try to use 'exact' for the componenets  <Route exact path="/" component= { Landing } />
     -  So it doesn't try to load all componenets?
 
+### Components and State
+After linking a field to state in component, it needs to be bound. There ways of doing it.
+- In constructor, onChange.bind(this)
+- or in the state delcaration onChange.bind(this)
+- states can be shown in React Chrome dev tool 
 
 
+### Axios
+HTTP Client to communicate with the back-end  
+``npm i axios``
+Useful for testing the api
+
+### Bootstrap form validation and Classnames
+Since bootstrap requires specific class names
+React does not change class name base on errors/conditions by default
+
+#### Classnames package for React
+``npm i classnames`` will let React to do that  
+Things like, if condition, then add thisClass to it;  
+So ex:    
+<code>
+    className={classnames("form-control form-control-lg", {  
+    'is-invalid': errors.name  
+    })}  
+</code>
+Where by default is form-control, and if errors.name exist, then is-invalid is used  
+
+if errors.name, class name will be set to bootstraps  
+``{ errors.name && (<div className="invalid-feedback">{errors.name}</div>) }``  
+However, bootstrap will automatically show and hide invalids  
+``<div className="invalid-feedback">{errors.name}</div>`` will work just as well.

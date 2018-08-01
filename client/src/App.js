@@ -11,18 +11,29 @@ import Register from './components/authentication/Register';
 
 import './App.css';
 
+import { Provider } from 'react-redux';
+// React lib that provides the Store that will hold the states
+// It will need to be initialized by createStore(reducer, preloadState)
+// where reducer should be the rooter reducer
+// preloadState will be the initial state that you want to add
+// enchancer where you apply the middlerware
+import store from './store';
+
+
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <NavBar />
-          <Route exact path="/" component={ Landing } />
-          <Route exact path="/register" component={ Register } />
-          <Route exact path="/login" component={ Login } />
-          <Footer />
-        </div>
-      </Router>
+      <Provider store={ store }>
+        <Router>
+          <div className="App">
+            <NavBar />
+            <Route exact path="/" component={ Landing } />
+            <Route exact path="/register" component={ Register } />
+            <Route exact path="/login" component={ Login } />
+            <Footer />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
