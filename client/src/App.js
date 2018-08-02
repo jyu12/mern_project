@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 // BroswerRouter mimics the back and forward button broswers
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import jwt_decode from 'jwt-decode';
 import setAuthenticationToken from './util/setAuthenticationToken';
 import { setCurrentUser, logoutUser } from './actions/authenticationAction';
+
+import PrivateRoute from './components/common/PrivateRoute';
 
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
@@ -11,6 +14,8 @@ import Landing from './components/layout/Landing';
 
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
+
+import Dashboard from './components/dashboard/Dashboard';
 
 import './App.css';
 
@@ -20,8 +25,8 @@ import './App.css';
 // preloadState will be the initial state that you want to add
 // enchancer where you apply the middlerware
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import store from './store';
+import { clearCurrentProfile } from './actions/profile';
 
 // Checks to make sure a user is logged in
 // then update redux state (dispatch)
@@ -33,7 +38,7 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     store.dispatch(logoutUser());
-    
+    store.dispatch(clearCurrentProfile());
     window.location.href = '/login';
   }
 }
@@ -47,8 +52,13 @@ class App extends Component {
           <div className="App">
             <NavBar />
             <Route exact path="/" component={ Landing } />
-            <Route exact path="/register" component={ Register } />
-            <Route exact path="/login" component={ Login } />
+            <div className="container">
+              <Route exact path="/register" component={ Register } />
+              <Route exact path="/login" component={ Login } />
+              <Switch>  {/* Prevent redirection issues when using the custom private routing */}
+                <PrivateRoute exact path="/dashboard" component={ Dashboard } />
+              </Switch>
+            </div>
             <Footer />
           </div>
         </Router>
