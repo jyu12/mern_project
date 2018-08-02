@@ -2,8 +2,10 @@
 import { combineReducers } from 'redux';
 import authenticationReducer from './authenticationReducer';
 import errorReducer from './errorReducer';
+import profile from './profile';
 
 export default combineReducers({
     authentication: authenticationReducer,
-    errors: errorReducer
+    errors: errorReducer,
+    profile
 });
