@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import jwt_decode from 'jwt-decode';
 import setAuthenticationToken from './util/setAuthenticationToken';
-import { setCurrentUser } from './actions/authenticationAction';
+import { setCurrentUser, logoutUser } from './actions/authenticationAction';
 
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
@@ -24,11 +24,18 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import store from './store';
 
 // Checks to make sure a user is logged in
-// then update redux state
+// then update redux state (dispatch)
 if (localStorage.jwtToken) {
   setAuthenticationToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
+
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+    
+    window.location.href = '/login';
+  }
 }
 
 

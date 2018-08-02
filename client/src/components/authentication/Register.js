@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 // import axios from 'axios';
 import PropTypes from 'prop-types';
 // withRoute allows the routing from within an action
@@ -10,6 +10,8 @@ import { withRouter } from 'react-router-dom';
 // Container in this case is just a component that works with redux
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authenticationAction';
+
+import TextInputForm from '../common/TextInputForm';
 
 class Register extends Component {
   // Components state for each of the fields - not related to Redux
@@ -33,6 +35,13 @@ class Register extends Component {
       this.setState({errors: nextProps.errors});
     }
   }
+  
+  componentDidMount() {
+    if (this.props.authentication.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
 
   // After assigning values to the fields, a change event( OnChange ) will needed for each field
   // Detect changes and run this
@@ -66,7 +75,6 @@ class Register extends Component {
     // call the actions using 'prop', this.props.history is for withRoute and redirection
     this.props.registerUser(newUser, this.props.history);
   }
-
   // 'required' HTML5 validation is not needed, since we already have validation 
   render() {
     // component level error states
@@ -80,55 +88,38 @@ class Register extends Component {
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create an account</p>
               <form noValidate onSubmit={ this.onSubmit.bind(this) }>
-                <div className="form-group">
-                  <input type="text" 
-                  className={classnames("form-control form-control-lg", {
-                    'is-invalid': errors.name
-                  })} 
-                  placeholder="Name" 
-                  name="name" 
-                  value={ this.state.name }
-                  onChange={ this.onChange }
-                  />
-                  <div className="invalid-feedback">{ errors.name }</div>
-                </div>
-                <div className="form-group">
-                  <input type="email" 
-                  className={classnames("form-control form-control-lg", {
-                    'is-invalid': errors.email
-                  })} 
-                  placeholder="Email Address" 
-                  name="email"
-                  value={ this.state.email }
-                  onChange={ this.onChange }
-                  />
-                  <div className="invalid-feedback">{ errors.email }</div>
-                  <small className="form-text text-muted">Use Gravatar email</small>
-                </div>
-                <div className="form-group">
-                  <input type="password" 
-                  className={classnames("form-control form-control-lg", {
-                    'is-invalid': errors.password
-                  })} 
-                  placeholder="Password" 
-                  name="password"
-                  value={ this.state.password }
-                  onChange={ this.onChange }
-                   />
-                   <div className="invalid-feedback">{ errors.password }</div>
-                </div>
-                <div className="form-group">
-                  <input type="password" 
-                  className={classnames("form-control form-control-lg", {
-                    'is-invalid': errors.confirmPassword
-                  })} 
-                  placeholder="Confirm Password" 
-                  name="confirmPassword"
-                  value={ this.state.confirmPassword }
-                  onChange={ this.onChange }
-                  />
-                  <div className="invalid-feedback">{ errors.confirmPassword }</div>
-                </div>
+                <TextInputForm
+                placeholder="Name"
+                name="name"
+                value={ this.state.name }
+                onChange= { this.onChange }
+                error= { errors.name }
+                />
+                <TextInputForm
+                placeholder="Email"
+                name="email"
+                type="email"
+                value={ this.state.email }
+                onChange= { this.onChange }
+                error= { errors.email }
+                info="Gravatar not found for user"
+                />
+                <TextInputForm
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={ this.state.password }
+                onChange= { this.onChange }
+                error= { errors.password }
+                />
+                <TextInputForm
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                value={ this.state.confirmPassword }
+                onChange= { this.onChange }
+                error= { errors.confirmPassword }
+                />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
