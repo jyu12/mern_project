@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import classnames from 'classnames';
+// import axios from 'axios';
+import PropTypes from 'prop-types';
+// withRoute allows the routing from within an action
+import { withRouter } from 'react-router-dom';
+
+// Connecting redux to this component
+// this will also need to export connect()
+// Container in this case is just a component that works with redux
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authenticationAction';
 
 class Register extends Component {
   // Components state for each of the fields - not related to Redux
@@ -16,6 +25,15 @@ class Register extends Component {
     // binding the field states to this object
     this.onChange = this.onChange.bind(this);
   }
+
+  // Life cycle method - this runs when new props are received
+  // Since props are being passed in by redux. The props can be then set as a component state
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
   // After assigning values to the fields, a change event( OnChange ) will needed for each field
   // Detect changes and run this
   onChange(event) {
@@ -41,14 +59,17 @@ class Register extends Component {
     }
     // user is returned after registering a user
     // the full http:// link is not needed because of the proxy value set in package.json
-    axios.post('/api/users/register', newUser)
-         .then(result => console.log(result.data))
-         .catch(error => this.setState({errors: error.response.data}));
+    // axios.post('/api/users/register', newUser)
+    //      .then(result => console.log(result.data))
+    //      .catch(error => this.setState({errors: error.response.data}));
+    
+    // call the actions using 'prop', this.props.history is for withRoute and redirection
+    this.props.registerUser(newUser, this.props.history);
   }
 
   // 'required' HTML5 validation is not needed, since we already have validation 
   render() {
-    // errors here?
+    // component level error states
     const { errors } = this.state; // same as const errors = this.state.errors;
 
     return (
@@ -118,4 +139,21 @@ class Register extends Component {
   }
 }
 
-export default Register;
+// React best practices: Props in component should be mapped to propTypes
+// Then set wheather its required or not, the types of values
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  authenication: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+// To get the authenticate states into components
+// 'authenication' is just a props to hold the state data so that
+// The state can be then accessed by using this.prop.mappedObjs
+const mapStateToProps = (state) => ({
+  authentication: state.authentication,  // authenication is from the root reducer
+  errors: state.errors
+});
+
+// second args is a map for actions,
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

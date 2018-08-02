@@ -31,7 +31,7 @@ router.post('/register', (request, response) => {
     // de-structuring in JS?
     const { errors, isValid } = validateRegisterInput(request.body);
     if(!isValid) {
-        return response.status(400).json(errors)
+        return response.status(400).json(errors);
     }
 
     User.findOne({ email: request.body.email }) // using body-parser to get e-mail from request
@@ -76,12 +76,16 @@ router.post('/register', (request, response) => {
 router.post('/login', (request, response) => {
     const { errors, isValid } = validateLoginInput(request.body);
 
+    if (!isValid) {
+        return response.status(400).json(errors);
+    }
+
     const email = request.body.email;
     const password = request.body.password;
 
     User.findOne({ email }).then(user => {
         if(!user) {
-            errors.email = 'user not found';
+            errors.email = 'User does not exist';
              return response.status(404).json(errors);
         }
 

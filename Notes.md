@@ -67,6 +67,7 @@ Chrome extension for working with React and Redux
 There are functional and class base components  
 - functionally should be 'dumb' component that will not involve in life cycles, states, etc  
  - It should just display components like that, stuff that is just for displaying
+- Props in components should be mapped using ``PropTypes from 'prop-types';``
 
 ### Router
 Make sure it's installed in react dir and ``npm i react-router-dom``, starting version 4, its -dom
@@ -106,3 +107,16 @@ if errors.name, class name will be set to bootstraps
 ``{ errors.name && (<div className="invalid-feedback">{errors.name}</div>) }``  
 However, bootstrap will automatically show and hide invalids  
 ``<div className="invalid-feedback">{errors.name}</div>`` will work just as well.
+
+## Redux
+``npm i redux react-redux redux-thunk``  
+Redux can be used anywhere, it's just most commonly used because of the react-redux lib  
+redux-thunk is middleware for dispatching ajax request to reducer  
+``import { Provider } from 'react-redux'`` the Store, that holds the states and this provider will need to wrap everything
+Componenet level states will only be accessible components, where data needs to passed from component to component  
+Redux allows application level states, where data can be shared with other components  
+- Redux Action, where component props are used to map redux actions
+- The action is then stored in another function file and when the function is called, request is made
+- Redux Reducer - the response from action can be sent to a reducer
+- Reducer can put the states into a Store, then to another component
+- Redux only has one Store, Flux can have many
