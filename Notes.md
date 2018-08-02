@@ -108,6 +108,7 @@ if errors.name, class name will be set to bootstraps
 However, bootstrap will automatically show and hide invalids  
 ``<div className="invalid-feedback">{errors.name}</div>`` will work just as well.
 
+
 ## Redux
 ``npm i redux react-redux redux-thunk``  
 Redux can be used anywhere, it's just most commonly used because of the react-redux lib  
@@ -120,3 +121,13 @@ Redux allows application level states, where data can be shared with other compo
 - Redux Reducer - the response from action can be sent to a reducer
 - Reducer can put the states into a Store, then to another component
 - Redux only has one Store, Flux can have many
+- The lifecycle of the states managed by redux will need to be managed by user
+    - Think what happens when the page refreshes
+
+### Action type
+Action must have a type, a 'type' is just an identifier for redux action  
+ex: ``SET_CURRENT`` is just a string IDing what it does.
+
+### Client-side decryption
+Since the app is using jwt-token authentication, ``jwt-decode`` is used to decode in authentication action
+

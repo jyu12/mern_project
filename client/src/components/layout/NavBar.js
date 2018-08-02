@@ -1,8 +1,52 @@
 import React, { Component } from 'react';
+
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authenticationAction';
 
 class NavBar extends Component {
+    onLogoutClick(event) {
+        event.preventDefault();
+        this.props.logoutUser();
+    }
+
     render() {  // life cyle method - renders whatever its returning..
+        const { isAuthenticated, user } = this.props.authentication;
+
+        const authenticationLinks = (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <a 
+                        href="" 
+                        onClick={this.onLogoutClick.bind(this)} 
+                        className="nav-link" 
+                    > 
+                    <img 
+                        className = "rounded-circle"
+                        src={user.avatar} 
+                        alt={user.name} 
+                        style={{ width: '25px', marginRight: '5px' }} 
+                        title="No gravatar found" 
+                    /> 
+                    Logout
+                    </a>
+                </li>
+            </ul>
+        );
+
+        const guestLinks = (
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/register">Sign Up</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
+            </ul>
+        );
+
+
         return (
             // Other logics can be done here
             // however, because React uses JSX (JavaScript syntax extension - lets you do javascripts in html), it must return this
@@ -20,14 +64,7 @@ class NavBar extends Component {
                             <Link className="nav-link" to="/profiles">People</Link>
                         </li>
                     </ul>
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Sign Up</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                    </ul>
+                    { isAuthenticated ? authenticationLinks : guestLinks }
                 </div>
                 </div>
             </nav>
@@ -35,4 +72,13 @@ class NavBar extends Component {
     }
 } 
 
-export default NavBar;
+NavBar.propTypes = {
+    logoutUser: propTypes.func.isRequired,
+    authentication: propTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+    authentication: state.authentication
+});
+
+export default connect(mapStateToProps, { logoutUser })(NavBar);
