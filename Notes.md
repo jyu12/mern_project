@@ -75,6 +75,7 @@ Make sure it's installed in react dir and ``npm i react-router-dom``, starting v
     - It can then be linked 'Link className="nav-link" to "/register"
 - should try to use 'exact' for the componenets  <Route exact path="/" component= { Landing } />
     -  So it doesn't try to load all componenets?
+- React does not have a built-in private route support like in Angular(RouteGuard) 
 
 ### Components and State
 After linking a field to state in component, it needs to be bound. There ways of doing it.

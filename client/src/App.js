@@ -16,6 +16,7 @@ import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
 
 import Dashboard from './components/dashboard/Dashboard';
+import CreateProfile from './components/create-profile/CreateProfile';
 
 import './App.css';
 
@@ -57,6 +58,9 @@ class App extends Component {
               <Route exact path="/login" component={ Login } />
               <Switch>  {/* Prevent redirection issues when using the custom private routing */}
                 <PrivateRoute exact path="/dashboard" component={ Dashboard } />
+              </Switch>
+              <Switch> 
+                <PrivateRoute exact path="/create-profile" component={ CreateProfile } />
               </Switch>
             </div>
             <Footer />
