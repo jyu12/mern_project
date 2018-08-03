@@ -103,6 +103,7 @@ render() {
         )
     }
 
+    // Static list of options.. 
     const options = [
         { label: '* Select Professional Status', value: 0 },
         { label: 'Student', value: 'Student' },
@@ -137,7 +138,7 @@ render() {
                     onChange={ this.onChange }
                     options={ options }
                     error={ errors.status }
-                    info="Where you are at professionally"    
+                    info="Where you are at professionally?"    
                 />
                 <TextInputForm 
                 placeholder="Company"
@@ -188,6 +189,7 @@ render() {
                 <div className="md-3">
                     <button 
                         type="button" 
+                        // display the social inputs contents when the button is clicked
                         onClick={() => {
                         this.setState(prevState => ({
                             displaySocialInputs: !prevState.displaySocialInputs
