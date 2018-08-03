@@ -102,7 +102,7 @@ class Register extends Component {
                 value={ this.state.email }
                 onChange= { this.onChange }
                 error= { errors.email }
-                info="Gravatar not found for user"
+                info="Email will be used for linking with Gravatar"
                 />
                 <TextInputForm
                 placeholder="Password"
