@@ -24,6 +24,26 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
+export const addExperience = (exp, history) => dispatch => {
+    axios.post('/api/profile/experience', exp)
+        .then(response => history.push('/dashboard'))
+        .catch(error => dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
+    );
+};
+
+export const addEducation = (edu, history) => dispatch => {
+    axios.post('/api/profile/education', edu)
+        .then(response => history.push('/dashboard'))
+        .catch(error => dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
+    );
+};
+
 // API deletes both profile and user
 // the promise will then set the user to {} and the reducer sets the authentication to false
 export const deleteAccount = () => dispatch => {
