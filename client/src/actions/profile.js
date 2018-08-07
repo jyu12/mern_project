@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PROFILE, GET_ERRORS, PROFILE_LOADING, CLEAR_CURRENT_PROFILE } from './types';
+import { GET_PROFILE, GET_ERRORS, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER } from './types';
 
 export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
@@ -22,6 +22,20 @@ export const createProfile = (profileData, history) => dispatch => {
             payload: error.response.data
         })
     );
+};
+
+// API deletes both profile and user
+// the promise will then set the user to {} and the reducer sets the authentication to false
+export const deleteAccount = () => dispatch => {
+    if (window.confirm('Are you sure?')) {
+        axios.delete('/api/profile').then(response => dispatch ({
+            type: SET_CURRENT_USER,
+            payload: {}
+        })).catch(error => dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        }));
+    }
 };
 
 export const setProfileLoading = () => {

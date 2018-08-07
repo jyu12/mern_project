@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
-import authenticationReducer from '../../reducers/authenticationReducer';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
+import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
 
   // makes an ajax call even redux is not used. This is called immediately when component is called
   componentDidMount() {
-      this.props.getCurrentProfile();
-  };
+    this.props.getCurrentProfile();
+  }
+
+  onDeleteClick(e) {
+    this.props.deleteAccount();
+  }
 
   render() {
     const { user } = this.props.authentication;
@@ -24,7 +28,14 @@ class Dashboard extends Component {
     } else {
         dashboardContent = <h1>Hello</h1>;
         if (Object.keys(profile).length > 0) {
-            dashboardContent = <h4>Displays Profile</h4>
+            dashboardContent = ( 
+                <div>
+                    <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{ user.name }</Link></p>
+                    <ProfileActions />
+                    {/* Profile Information */}
+                    <div style={{ marginBottom: '60px' }} />
+                    <button onClick={ this.onDeleteClick.bind() } className="btn btn-danger">Delete Account</button>
+                </div> );
         } else {
             dashboardContent = (
                 <div>
@@ -52,6 +63,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
+    deleteAccount: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     authentication: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
@@ -62,4 +74,4 @@ const mapStateToProps = state => ({
     authentication: state.authentication
 })
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
