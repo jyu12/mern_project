@@ -1,14 +1,20 @@
-import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE } from '../actions/types';
+import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_PROFILES } from '../actions/types';
 
 
 const initialState = {
-    profile: null,
+    profile: null, 
     profiles: null,
     loading: false  // while fetching profile(s), so components can use this state for stuff like spinners
 }
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case GET_PROFILES:
+            return {
+                ...state, // current states
+                profiles: action.payload,   // fill with the payload
+                loading: false
+            };
         case PROFILE_LOADING:
             return {
                 ...state,

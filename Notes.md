@@ -102,6 +102,10 @@ if errors.name, class name will be set to bootstraps
 However, bootstrap will automatically show and hide invalids  
 ``<div className="invalid-feedback">{errors.name}</div>``    Will work just as well.
 
+### React-Moment
+React component for displaying dates.
+<code><Moment format="YYYY/MM/DD"/></code>
+
 
 ## Redux
 ``npm i redux react-redux redux-thunk``  

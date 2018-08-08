@@ -1,15 +1,30 @@
 import axios from 'axios';
-import { GET_PROFILE, GET_ERRORS, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER } from './types';
+import { GET_PROFILE, GET_ERRORS, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER, GET_PROFILES } from './types';
 
 export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
     axios.get('/api/profile').then(response => dispatch({
         type: GET_PROFILE,
         payload: response.data
-    })).catch(error => dispatch({
-        type: GET_PROFILE,
-        payload: {}
-    }));
+    })).catch(
+        error => dispatch({
+            type: GET_PROFILE,
+            payload: {}
+        })
+    );
+};
+
+export const getProfiles = () => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get('/api/profile/all').then(response => dispatch({
+        type: GET_PROFILES,
+        payload: response.data
+    })).catch(
+        error => dispatch({
+            type: GET_PROFILES,
+            payload: null   // keep the reducer profile state to null
+        })
+    );
 };
 
 // history is needed for redirect
