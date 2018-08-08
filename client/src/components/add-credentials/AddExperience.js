@@ -58,7 +58,7 @@ class AddExperience extends Component {
             current: !this.state.current
         })
     }
-    
+
     render() {
         const { errors } = this.state;
         return (
@@ -140,13 +140,13 @@ class AddExperience extends Component {
 
 AddExperience.propTypes = {
     profile: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    addExperience: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     profile: state.profile,
     errors: state.errors,
-    addExperience: PropTypes.func.isRequired
 });
 
 export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience));
