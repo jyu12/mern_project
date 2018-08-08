@@ -147,7 +147,6 @@ AddEducation.propTypes = {
 const mapStateToProps = state => ({
     profile: state.profile,
     errors: state.errors,
-    addEducation: PropTypes.func.isRequired
 });
 
 export default connect(mapStateToProps, { addEducation })(withRouter(AddEducation));
