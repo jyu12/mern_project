@@ -134,7 +134,7 @@ class Register extends Component {
 // Then set wheather its required or not, the types of values
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  authenication: PropTypes.object.isRequired,
+  authentication: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 

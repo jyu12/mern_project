@@ -44,6 +44,32 @@ export const addEducation = (edu, history) => dispatch => {
     );
 };
 
+export const deleteExperience = (id) => dispatch => {
+    axios.delete(`/api/profile/experience/${id}`)
+        .then(response => dispatch({
+            type: GET_PROFILE,
+            payload: response.data
+        }))
+        .catch(error => dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
+    );
+};
+
+export const deleteEducation = (id) => dispatch => {
+    axios.delete(`/api/profile/education/${id}`)
+        .then(response => dispatch({
+            type: GET_PROFILE,
+            payload: response.data
+        }))
+        .catch(error => dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        })
+    );
+};
+
 // API deletes both profile and user
 // the promise will then set the user to {} and the reducer sets the authentication to false
 export const deleteAccount = () => dispatch => {
