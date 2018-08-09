@@ -24,6 +24,8 @@ import Profile from './components/profile/Profile';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 
+import NotFound from './components/not-found/NotFound';
+
 import './App.css';
 
 // React lib that provides the Store that will hold the states
@@ -63,6 +65,7 @@ class App extends Component {
               <Route exact path="/login" component={ Login } />
               <Route exact path="/profiles" component={ Profiles } />
               <Route exact path="/profile/:handle" component={ Profile } />
+              <Route exact path="/not-found" component={ NotFound } />
               <Switch>  {/* Prevent redirection issues when using the custom private routing */}
                 <PrivateRoute exact path="/dashboard" component={ Dashboard } />
               </Switch>
