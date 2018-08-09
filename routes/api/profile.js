@@ -50,7 +50,7 @@ router.get('/handle/:handle', (request, response) => {
         }
         response.json(profile);
     })
-    .catch(error => response.status(404).json(errro));
+    .catch(error => response.status(404).json(error));
 });
 
 //  @route   GET api/profile/user/ :userId
