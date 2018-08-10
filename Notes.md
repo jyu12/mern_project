@@ -106,7 +106,6 @@ However, bootstrap will automatically show and hide invalids
 React component for displaying dates.
 <code><Moment format="YYYY/MM/DD"/></code>
 
-
 ## Redux
 ``npm i redux react-redux redux-thunk``  
 * Redux can be used anywhere, it's just most commonly used because of the react-redux lib  
@@ -130,8 +129,10 @@ Lifecyle methods are important in managing the state of the react application an
 These methods has/will be deprecated starting React 16.3+ and was replaced with getDerivedStateFromProps.
 See [article](https://medium.com/@baphemot/understanding-react-react-16-3-component-life-cycle-23129bc7a705)
 
-
-
 ### Client-side decryption
 Since the app is using jwt-token authentication, ``jwt-decode`` is used to decode in the authentication action
+
+## Deploying to Heroku
+* Make sure to use enviroment vars for the keys.
+
 
