@@ -8,3 +8,4 @@ Notes.md
 client/src/img/showcase.jpg.bak.jpg
 .DS_Store
 Notes.md
+client/src/config/keys.js

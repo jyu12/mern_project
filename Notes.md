@@ -120,6 +120,12 @@ React component for displaying dates.
 * The life cycle of the states managed by redux will need to be managed by user
     - Think what happens when the page refreshes
 
+### Life-cycle methods
+Lifecyle methods are important in managing the state of the react application and how the UI is updated as user interact with the application. Commonly used ones used... at least in this application are componentWillReceiveProps, componentDidMount.
+These methods has/will be deprecated starting React 16.3+ and was replaced with getDerivedStateFromProps.
+See [article](https://medium.com/@baphemot/understanding-react-react-16-3-component-life-cycle-23129bc7a705)
+
+
 ### Action type
 Action must have a type, a 'type' is just an identifier for redux action  
 ex: ``SET_CURRENT`` is just a string IDing what it does.
