@@ -110,15 +110,20 @@ React component for displaying dates.
 ## Redux
 ``npm i redux react-redux redux-thunk``  
 * Redux can be used anywhere, it's just most commonly used because of the react-redux lib  
-* redux-thunk is middleware for dispatching ajax request to redux reducers  
-* Component level states will only be accessible to components. Redux allows application level states, where data can be shared with other components.
-* Redux Action, where component props are used to map redux actions
+* redux-thunk is middleware for dispatching ajax(dispatch(yourAjxCall())) request to redux reducers  
+* Component level states will only be accessible to components. Redux allows application level states, where data can be shared with other components. It utilized "Actions" and "Reducer"
+    - Redux Action, where props used in a component are "mapped" and "connected" to their "action"
+    - So actions clearly signify a change in the component's states. ie. DELETE_POST
+    - Reducer, then takes the state and the action from the Action and return the new state of the application 
 * The action is then stored in another function file(Store) and when the function is called, a request is made
-* Redux Reducer - the response from action can be sent to a reducer
 * Reducer can put the states into a Store, then to another component
-* Redux only has one Store, Flux can have many
+    - Redux only has one Store, Flux can have many
 * The life cycle of the states managed by redux will need to be managed by user
     - Think what happens when the page refreshes
+
+### Action naming conventions
+Action must have a type, a 'type' is just an identifier for redux action  
+ex: ``SET_CURRENT`` is just a string IDing what it does.
 
 ### Life-cycle methods
 Lifecyle methods are important in managing the state of the react application and how the UI is updated as user interact with the application. Commonly used ones used... at least in this application are componentWillReceiveProps, componentDidMount.
@@ -126,9 +131,6 @@ These methods has/will be deprecated starting React 16.3+ and was replaced with 
 See [article](https://medium.com/@baphemot/understanding-react-react-16-3-component-life-cycle-23129bc7a705)
 
 
-### Action type
-Action must have a type, a 'type' is just an identifier for redux action  
-ex: ``SET_CURRENT`` is just a string IDing what it does.
 
 ### Client-side decryption
 Since the app is using jwt-token authentication, ``jwt-decode`` is used to decode in the authentication action
