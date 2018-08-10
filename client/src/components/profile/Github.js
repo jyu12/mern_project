@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import keys from '../../config/keys'
 
 class Github extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clientId: 'df66183d5b10556cbc41',
-      cleintSecret: '5d29e5b7ca4d12d820098296b4ed03bc30d9aaa9',
+      clientId: keys.githubClientId,
+      clientSecret: keys.githubClientSecret,
       count: 5,
       sort: 'created: asc',
       repos: []
@@ -15,8 +16,8 @@ class Github extends Component {
 
   componentDidMount() {
     const { username } = this.props;
-    const { count, sort, clientId, cleintSecret } = this.state;
-    fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${cleintSecret}`)
+    const { count, sort, clientId, clientSecret } = this.state;
+    fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`)
       .then(response => response.json())
       .then(data => { 
         // When the user leaves the page before the fetch is done, the setState will try to mount on a component that no longer exist
