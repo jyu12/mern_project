@@ -8,8 +8,8 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 const validateProfileInput = require('../../validation/profile');
-const validateExperienceInput = require('../../validation/Experience');
-const validateEducationInput = require('../../validation/Education');
+const validateExperienceInput = require('../../validation/experience');
+const validateEducationInput = require('../../validation/education');
 
 //  @route   GET api/profile/
 //  @desc    get current profile
