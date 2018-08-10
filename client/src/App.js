@@ -26,6 +26,9 @@ import AddEducation from './components/add-credentials/AddEducation';
 
 import NotFound from './components/not-found/NotFound';
 
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
+
 import './App.css';
 
 // React lib that provides the Store that will hold the states
@@ -81,7 +84,12 @@ class App extends Component {
               <Switch> 
                 <PrivateRoute exact path="/add-education" component={ AddEducation } />
               </Switch>
-              
+              <Switch> 
+                <PrivateRoute exact path="/feed" component={ Posts } />
+              </Switch>
+              <Switch> 
+                <PrivateRoute exact path="/post/:id" component={ Post } />
+              </Switch>
             </div>
             <Footer />
           </div>
