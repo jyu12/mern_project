@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment } from '../../actions/post';
-import post from '../../reducers/post';
+import { Link } from 'react-router-dom'
 
 class CommentItem extends Component {
   onDeleteCLick(postId, commentId) {
       this.props.deleteComment(postId, commentId) 
   }
   render() {
-    const {comment, postId, authentication } = this.props;
+    const {comment, postId, authentication, profile } = this.props;
     return (
         <div className="card card-body mb-3">
             <div className="row">
                 <div className="col-md-2">
-                    <a href="profile.html">
-                    <img className="rounded-circle d-none d-md-block" src={comment.avatar} alt="" />
-                    </a>
+                    <Link to={`profile/`} 
+                        className="rounded-circle d-none d-md-block">
+                        <img  src={comment.avatar} 
+                        alt="" 
+                        />
+                    </Link>
                     <br />
                     <p className="text-center">{comment.name}</p>
                 </div>
@@ -45,7 +48,7 @@ CommentItem.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    authentication: state.authentication
+    authentication: state.authentication,
 });
 
 export default connect(mapStateToProps, { deleteComment })(CommentItem);
