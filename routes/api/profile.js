@@ -14,7 +14,7 @@ const validateEducationInput = require('../../validation/education');
 //  @route   GET api/profile/
 //  @desc    get current profile
 //  @access  Public 
-router.get('/new', (request, response) => response.json({msg: "profile work"}));
+// router.get('/new', (request, response) => response.json({msg: "profile work"}));
 
 //  @route   GET api/profile/
 //  @desc    get current users profile

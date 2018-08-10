@@ -7,7 +7,7 @@ const Post = require('../../models/Post');
 const Profile = require('../../models/Profile')
 const validatePostInput = require('../../validation/post')
 
-router.get('/new', (request, respond) => respond.json({msg: "post work"}));
+// router.get('/new', (request, respond) => respond.json({msg: "post work"}));
 
 //  @route   GET api/posts
 //  @desc    Get post

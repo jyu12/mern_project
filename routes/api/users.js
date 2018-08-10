@@ -22,7 +22,7 @@ const validateLoginInput = require('../../validation/login');
     @desc    Tests users route
     @access  Public 
 */
-router.get('/test', (request, response) => response.json({msg: "user work"}));  // automatically return status 200 and as a .json
+// router.get('/test', (request, response) => response.json({msg: "user work"}));  // automatically return status 200 and as a .json
 
 //  @route   POST api/users/register
 //  @desc    register the user

@@ -30,9 +30,9 @@ mongoose
     .catch(err => console.log(err));
 
 // creating a route using express
-app.get('/', (request, respond) => {
-    respond.send('Hello');
-});
+// app.get('/', (request, respond) => {
+//     respond.send('Hello');
+// });
 
 // Using the routes *May see a Route.use() requires middleware function but got obj* It just means that there were no usable functions in file
 app.use('/api/users', users)
