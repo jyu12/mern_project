@@ -132,7 +132,28 @@ See [article](https://medium.com/@baphemot/understanding-react-react-16-3-compon
 ### Client-side decryption
 Since the app is using jwt-token authentication, ``jwt-decode`` is used to decode in the authentication action
 
-## Deploying to Heroku
-* Make sure to use enviroment vars for the keys.
+## Deployment
+Make sure to use enviroment vars for the keys.
 
+### Building the React App
+`npm run build` will create the static files for the app. Then these can then be deployed.
+In the case of this application. Front-end and back-end are technically two different applications, running on different servers. So when the app is in production the server will need to point to the react app.
+
+### Deploying to Heroku
+the CLI `brew install heroku/brew/heroku`
+* Create a heroku app/repo. 
+    - `heroku create`
+* Add any environment variables on the heroku env
+* Add git remote repo 
+    - `heroku git:remote -a <The heroku app name>` 
+* Once the git repo is set, then the project can be pushed
+    - `git push heroku master`
+
+#### Create a React build script for Heroku
+So that the server will build the react app everytime we do the heroku pushed  
+On the server package.json add a script  
+`"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"`
+
+* `"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false "`
+This is so that the dependency are still ran(i.e webpack), and "--prefix" so that it's the react app is build..
 

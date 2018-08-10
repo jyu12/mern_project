@@ -2,6 +2,7 @@
 // Remember.. requires needs dir path if not root
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -37,6 +38,16 @@ app.get('/', (request, respond) => {
 app.use('/api/users', users)
 app.use('/api/profile', profile)
 app.use('/api/posts', posts)
+
+// Serve static resources if in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    // if any of the routes are requested, the client index file is used.
+    app.get('*', (request, response) => {
+        response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 // process.env.PORT for when deploying to a server, locally it will use 5000
 const port = process.env.PORT || 5000;
