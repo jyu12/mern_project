@@ -1,4 +1,4 @@
-## Notes on creating web app using a MERN Stack
+## Personal notes on creating web app using a MERN Stack
 Using MongoDb, Express, React, Redux and Node.js to create a web application. 
 * Back-end API with MongoDB, Express and Node.js
 * Front-end application using React
