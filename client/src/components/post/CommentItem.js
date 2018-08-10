@@ -9,7 +9,7 @@ class CommentItem extends Component {
       this.props.deleteComment(postId, commentId) 
   }
   render() {
-    const {comment, postId, authentication, profile } = this.props;
+    const {comment, postId, authentication } = this.props;
     return (
         <div className="card card-body mb-3">
             <div className="row">
