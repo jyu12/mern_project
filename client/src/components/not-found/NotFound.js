@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Should route all 'not found' resources to this
 export default () => {
   return (
     <div>
